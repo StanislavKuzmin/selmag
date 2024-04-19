@@ -28,6 +28,5 @@ public class BadRequestControllerAdvice {
                         .toList());
         return ResponseEntity.badRequest()
                 .body(problemDetail);
-
     }
 }
