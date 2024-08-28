@@ -32,12 +32,12 @@ public class ProductController {
 
     @GetMapping
     public String getProduct() {
-        return "catalogue/products/product";
+        return "/catalogue/products/product";
     }
 
     @GetMapping("/edit")
     public String getProductEditPage() {
-        return "catalogue/products/edit";
+        return "/catalogue/products/edit";
     }
 
     @PostMapping("/edit")
