@@ -76,13 +76,13 @@ public class RestClientProductsRestClient implements ProductsRestClient {
     @Override
     public void deleteProduct(int productId) {
         try {
-            Optional.of(this.restClient.delete()
+            this.restClient
+                    .delete()
                     .uri("/catalogue-api/products/{productId}", productId)
                     .retrieve()
-                    .toBodilessEntity());
+                    .toBodilessEntity();
         } catch (HttpClientErrorException.NotFound exception) {
             throw new NoSuchElementException(exception);
         }
-
     }
 }
