@@ -6,3 +6,18 @@ selmag:
       uri: http://localhost:8084
 server:
   port: 8083
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: customer-app
+            client-secret: okL2TevMz7qw4F3hOIO2YsMzugLf1fPR
+            scope:
+              - openid
+              - view_catalogue
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/selmag
+            user-name-attribute: preferred_username
