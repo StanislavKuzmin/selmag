@@ -39,12 +39,12 @@ public class ProductRestController {
     @PatchMapping
     public ResponseEntity<?> updateProduct(@PathVariable("productId") int productId,
                                            @Valid @RequestBody UpdateProductPayload payload,
-                                           BindingResult result) throws BindException {
-        if (result.hasErrors()) {
-            if (result instanceof BindException exception) {
-                throw  exception;
+                                           BindingResult bindingResult) throws BindException {
+        if (bindingResult.hasErrors()) {
+            if (bindingResult instanceof BindException exception) {
+                throw exception;
             } else {
-                throw new BindException(result);
+                throw new BindException(bindingResult);
             }
         } else {
             this.productService.updateProduct(productId, payload.title(), payload.details());

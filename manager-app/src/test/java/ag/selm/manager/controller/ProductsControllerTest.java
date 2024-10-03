@@ -42,7 +42,7 @@ class ProductsControllerTest {
         //when
         var result = this.productsController.createProduct(payload, model, response);
         //then
-        assertEquals("redirect:catalogue/products/1", result);
+        assertEquals("redirect:/catalogue/products/1", result);
 
         verify(this.productsRestClient).createProduct("Новый товар", "Описание нового товара");
         verifyNoMoreInteractions(this.productsRestClient);

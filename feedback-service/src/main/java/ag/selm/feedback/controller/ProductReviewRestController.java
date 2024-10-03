@@ -3,6 +3,8 @@ package ag.selm.feedback.controller;
 import ag.selm.feedback.controller.payload.NewProductReviewPayload;
 import ag.selm.feedback.entity.ProductReview;
 import ag.selm.feedback.service.ProductReviewsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,9 @@ public class ProductReviewRestController {
     private final ProductReviewsService productReviewsService;
 
     @GetMapping("/by-product-id/{productId:\\d+}")
+    @Operation(
+            security = @SecurityRequirement(name = "keycloak")
+    )
     public Flux<ProductReview> findProductReviewsByProductId(@PathVariable(name = "productId") int productId) {
         return this.productReviewsService.findProductReviewsByProduct(productId);
     }
