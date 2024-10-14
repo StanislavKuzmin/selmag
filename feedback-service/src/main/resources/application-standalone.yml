@@ -1,6 +1,8 @@
 server:
   port: 8084
 spring:
+  application:
+    name: selmag-feedback-service
   data:
     mongodb:
       uri: mongodb://localhost:27017/feedback-db
@@ -8,7 +10,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8082/realms/selmag
+          issuer-uri: http://172.17.0.1:8082/realms/selmag
 springdoc:
   swagger-ui:
     oauth:
@@ -16,3 +18,19 @@ springdoc:
       use-pkce-with-authorization-code-grant: true
 keycloak:
   uri: http://localhost:8082
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://172.17.0.1:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0

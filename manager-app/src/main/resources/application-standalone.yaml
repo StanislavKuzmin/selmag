@@ -4,6 +4,8 @@ selmag:
       uri: http://localhost:8081
       registration-id: keycloak
 spring:
+  application:
+    name: selmag-manager-app
   jpa:
     show-sql: true
   security:
@@ -11,7 +13,7 @@ spring:
       client:
         provider:
           keycloak:
-            issuer-uri: http://localhost:8082/realms/selmag
+            issuer-uri: http://172.17.0.1:8082/realms/selmag
             user-name-attribute: preferred_username
         registration:
           keycloak:
@@ -22,6 +24,22 @@ spring:
               - view_catalogue
               - edit_catalogue
               - microprofile-jwt
+management:
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  zipkin:
+    tracing:
+      endpoint: http://172.17.0.1:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0
 
 
 
