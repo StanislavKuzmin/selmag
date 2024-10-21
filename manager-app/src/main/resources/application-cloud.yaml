@@ -1,11 +1,15 @@
 selmag:
   service:
     catalogue:
-      uri: http://localhost:8081
+      uri: lb://catalogue-service
       registration-id: keycloak
 spring:
   application:
     name: selmag-manager-app
+  boot:
+    admin:
+      client:
+        enabled: false
   jpa:
     show-sql: true
   security:
@@ -24,6 +28,20 @@ spring:
               - view_catalogue
               - edit_catalogue
               - microprofile-jwt
+          metrics:
+            provider: keycloak
+            client-id: manager-app
+            client-secret: HwjnCpffTIbXxdEtYq43Bhc6ZvkNbTM8
+            authorization-grant-type: client_credentials
+            scope:
+              - metrics_server
+          discovery:
+            provider: keycloak
+            client-id: manager-app
+            client-secret: HwjnCpffTIbXxdEtYq43Bhc6ZvkNbTM8
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
 management:
   health:
     livenessstate:
@@ -41,5 +59,10 @@ management:
     sampling:
       probability: 1.0
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
-    enabled: false
+    service-url:
+      defaultZone: http://172.17.0.1:8761/eureka/
+
+

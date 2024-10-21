@@ -25,6 +25,13 @@ spring:
               - openid
             client-id: admin-service
             client-secret: r9tQfdSBJ9xmJFpx8UT5DOxg8ZT7RlDC
+          discovery:
+            provider: keycloak
+            client-id: admin-service
+            client-secret: r9tQfdSBJ9xmJFpx8UT5DOxg8ZT7RlDC
+            authorization-grant-type: client_credentials
+            scope:
+              - discovery
 management:
   endpoints:
     web:
@@ -33,5 +40,9 @@ management:
           - health
           - prometheus
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
-    enabled: false
+    service-url:
+      defaultZone: http://172.17.0.1:8761/eureka/
+    register-with-eureka: false
