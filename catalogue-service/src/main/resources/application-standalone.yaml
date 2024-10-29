@@ -9,6 +9,9 @@ spring:
           name: selmag-catalogue-service
           service-host-type: ip
         enabled: true
+  cloud:
+    config:
+      enabled: false
   datasource:
     url: jdbc:postgresql://localhost:5432/catalogue
     username: catalogue
@@ -37,6 +40,7 @@ spring:
             issuer-uri: http://172.17.0.1:8082/realms/selmag
 server:
   port: 8081
+  forward-headers-strategy: framework
 logging:
   level:
     sql: info

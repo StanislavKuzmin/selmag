@@ -1,5 +1,6 @@
 server:
   port: 8081
+  forward-headers-strategy: framework
 spring:
   application:
     name: catalogue-service
@@ -17,6 +18,9 @@ spring:
       - catalogue
   jpa:
     show-sql: true
+  cloud:
+    config:
+      enabled: false
   security:
     oauth2:
       resourceserver:
